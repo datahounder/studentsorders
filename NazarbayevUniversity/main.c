@@ -85,7 +85,7 @@ int addResults(int n, Team teams[32]){
 Team* printStandings(int n, Team teams[32], char fileName[20]){
 
     Team* x =&teams[0];
-    int j=0, DF=0, max=0, id, flag=0; 
+    int j=0, DF=0,  id, flag=0; 
     FILE * file = fopen(fileName, "w"); 
 
     printf("TEAM                 P    GF   GA   GD\n");
@@ -94,23 +94,25 @@ Team* printStandings(int n, Team teams[32], char fileName[20]){
     for (j=0; j<n; j++){
   
         DF=teams[j].goalFor-teams[j].goalAgainst;
+
         if(teams[j].points>x->points){
            x = &teams[j];
            flag=0;
         }
         else if(teams[j].points==x->points){              
-             if(DF>max){
-                x=&teams[j];
-                max=DF;
+             if(DF>x->goalFor-x->goalAgainst){
+                x = &teams[j];
+                
                 flag=0;
               }
-              else if(DF==max){
+              else if(DF==x->goalFor-x->goalAgainst){
                 if(teams[j].goalFor>x->goalFor){
-                   x=&teams[j];
+                   x = &teams[j];
                    flag=0;
                 }
-                else{
+                else if(teams[j].goalFor==x->goalFor){                   
                   flag=1;
+                   
                 }
               }
          }
@@ -269,7 +271,7 @@ int main() {
     if(x==NULL){ // calling a function, if function will return NULL then program will print this output
       printf("More than 1 champion\n");
     } else {
-      printf("Champion team is %s\n", x->name); // if not it will print the champion team
+      printf("Champion team is %s %d\n", x->name, x->goalFor); // if not it will print the champion team
     }
     
     printf("\n");
