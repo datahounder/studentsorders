@@ -1,8 +1,3 @@
-/* CH-230-A
-  A7.p6 simple_arithmetics Compute Devision (lanuage-C)
- Valdrin Smakaj
-Vsmakaj@jacobs-university.de
-*/
 
 #include <stdio.h>
 #include <string.h>
